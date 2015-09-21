@@ -4,7 +4,7 @@ Kudos to
 - React & React-Native team
 - [chentsulin] (https://github.com/chentsulin) (for this superbly simple example)
 above all to 
-- [gaearon](https://github.com/gaearon) and Redux contributors
+- [gaearon](https://github.com/gaearon) and [Redux] (https://github.com/gaearon/redux) contributors
 -Components & Abstraction
 
 - react-native 0.11
