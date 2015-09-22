@@ -1,4 +1,4 @@
-var React = require('react-native');
+import React from 'react-native';
 
 var {
   Component,
@@ -9,52 +9,138 @@ var {
   TouchableHighlight,
 } = React;
 
-class JobsHome extends Component {
-  render() {
-    var { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Clicked: {counter} times</Text>
-        <TouchableHighlight onPress={increment}>
-          <Text style={styles.text}>+</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={decrement}>
-          <Text style={styles.text}>-</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={incrementIfOdd}>
-          <Text style={styles.text}>Increment if odd</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => incrementAsync()}>
-          <Text style={styles.text}>Increment async</Text>
-        </TouchableHighlight>
-      </View>
-    );
+var drawerStyles = {
+  drawer: {
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 0,
   }
 }
 
-JobsHome.propTypes = {
-  increment: PropTypes.func.isRequired,
-  incrementIfOdd: PropTypes.func.isRequired,
-  incrementAsync: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
-  counter: PropTypes.number.isRequired
-};
+var styles = require('../styles');
+import Drawer from 'react-native-drawer';
+import MyControlPanel  from '../ControlPanel';
+import MyMainView from '../MyMainView';
 
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+var deviceScreen = require('Dimensions').get('window')
+var tweens = require('../tweens')
+
+var counter = 0
+var RNDrawerDemo = React.createClass({
+  getInitialState(){
+    return {
+      drawerType: 'overlay',
+      openDrawerOffset:0,
+      closedDrawerOffset:0,
+      panOpenMask: .1,
+      panCloseMask: .9,
+      relativeDrag: false,
+      panStartCompensation: true,
+      openDrawerThreshold: .25,
+      tweenHandlerOn: false,
+      tweenDuration: 350,
+      tweenEasing: 'linear',
+      disabled: false,
+      tweenHandlerPreset: null,
+      acceptDoubleTap: true,
+      acceptTap: false,
+      acceptPan: true,
+      rightSide: false,
+    }
   },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+
+  setDrawerType(type){
+    this.setState({
+      drawerType: type
+    })
   },
+
+  tweenHandler(ratio){
+    if(!this.state.tweenHandlerPreset){ return {} }
+    return tweens[this.state.tweenHandlerPreset](ratio)
+  },
+
+  noopChange(){
+    this.setState({
+      changeVal: Math.random()
+    })
+  },
+
+  openDrawer(){
+    this.refs.drawer.open()
+  },
+
+  setStateFrag(frag){
+    this.setState(frag)
+  },
+
+  render() {
+    var controlPanel = <DrawerMenu closeDrawer={() => {this.refs.drawer.close()}} />
+    return (
+      <Drawer
+        ref="drawer"
+        type="overlay"
+        openDrawerOffset={50} //50px gap on the right side of drawer
+        panCloseMask={1} //can close with right to left swipe anywhere on screen
+        styles={{
+          drawer: {
+            shadowColor: "#000000",
+            shadowOpacity: 0.8,
+            shadowRadius: 0,
+          }
+        }}
+        tweenHandler={(ratio) => {
+          return {
+            drawer: { shadowRadius: Math.min(ratio*5*5, 5) },
+            main: { opacity:(2-ratio)/2 },
+          }
+        }}
+        content={controlPanel} >
+        <MyMainView
+          drawerType={this.state.drawerType}
+          setParentState={this.setStateFrag}
+          openDrawer={this.openDrawer}
+          openDrawerOffset={this.state.openDrawerOffset}
+          closedDrawerOffset={this.state.closedDrawerOffset}
+          panOpenMask={this.state.panOpenMask}
+          panCloseMask={this.state.panCloseMask}
+          relativeDrag= {this.state.relativeDrag}
+          panStartCompensation= {this.state.panStartCompensation}
+          tweenHandlerOn={this.state.tweenHandlerOn}
+          disabled={this.state.disabled}
+          openDrawerThreshold={this.state.openDrawerThreshold}
+          tweenEasing={this.state.tweenEasing}
+          tweenHandlerPreset={this.state.tweenHandlerPreset}
+          animation={this.state.animation}
+          noopChange={this.noopChange}
+          acceptTap={this.state.acceptTap}
+          acceptDoubleTap={this.state.acceptDoubleTap}
+          acceptPan={this.state.acceptPan}
+          rightSide={this.state.rightSide}
+          />
+      </Drawer>
+    );
+  }
 });
 
-module.exports = JobsHome;
+// AppRegistry.registerComponent('JobsHome', () => RNDrawerDemo);
+
+
+// var styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5FCFF',
+//   },
+//   text: {
+//     fontSize: 20,
+//     textAlign: 'center',
+//     margin: 10,
+//   },
+// });
+
+module.exports = RNDrawerDemo;
 
 
 
