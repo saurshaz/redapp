@@ -105,4 +105,23 @@ module.exports = StyleSheet.create({
     marginLeft:20,
     alignSelf: 'center',
   },
+  cellImage: {
+      height: 60,
+      borderRadius: 30,
+      width: 60,
+      backgroundColor: '#fff',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+  },
+
+
+
+  controlPanelMenu:{
+    backgroundColor: '#eeeeee',
+  },
+
+  contentPortion:{
+    backgroundColor: '#aaaaaa',
+  },
 });

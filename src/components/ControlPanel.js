@@ -11,6 +11,8 @@ var {
 
 var styles = require('./styles')
 var Button = require('./Button')
+var VibrancyView = require('react-native-blur').VibrancyView;
+      
 
 export default class extends Component {
 
@@ -19,14 +21,18 @@ export default class extends Component {
   }
 
   render(){
+    let uri = "http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg";
     return (
+        <ScrollView
+          pointerEvents="box-none"
+          style={styles.scrollView}
+          scrollEventThrottle={200}
+          contentInset={{top: 0}}
+          >
+          <Image source={{uri}} style={styles.controlPanelMenu}>
+                <VibrancyView blurType="light" style={styles.blur}>
 
-      <ScrollView
-        pointerEvents="box-none"
-        style={styles.scrollView}
-        scrollEventThrottle={200}
-        contentInset={{top: 0}}
-        >
+    
           <Text style={styles.welcome}>
             <Text style={styles.rowLabel} onPress={this.props.closeDrawer}>Welcome </Text>
           </Text>
@@ -51,8 +57,11 @@ export default class extends Component {
           </View>
           <View style={styles.row}>
             <Text style={styles.rowLabel}>Logout</Text>
-          </View>
-      </ScrollView>
+          </View> 
+          </VibrancyView>  
+        </Image>   
+        </ScrollView>
+
       
     )
   }
