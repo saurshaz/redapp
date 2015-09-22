@@ -1,4 +1,16 @@
-# react-native-counter-ios-android
+######################################################
+# HRX 												 #
+######################################################
+
+
+-- change project name
+-- move to components folder
+-- connect to backend (seperate Node.JS server) 
+-- connect to backend (seperate Python server) 
+
+######################################################
+# Credits											 #
+######################################################
 
 Kudos to 
 - React & React-Native team
@@ -14,7 +26,9 @@ above all to
 
 ![](demo.png)
 
-## How to run this Porject
+######################################################
+# How to run this Porject           				 #
+######################################################
 
 ### Changes
 - Added ES6 support  and more REdux code to the simpler example post understanding.
