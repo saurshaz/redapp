@@ -9,6 +9,46 @@
 -- connect to backend (seperate Python server) 
 
 ######################################################
+# UX Features										 #
+######################################################
+-- Drawer Nav Panel
+-- Tinder like swipe
+-- Header Panel (ideally scrolling collapsed)
+-- Notification drop down from top
+-- Routing
+-- Camera integration and pick image from gallery
+-- Push Notification(GCM and APN settings)
+-- Access to Contacts
+-- Access to GPS and Map view
+-- Spinner
+-- Select 2 (addable tags and dropdown to select those)
+-- Date Picker
+-- Social Login (FB and LinkedIn)
+-- Integrate Twitter,Github,Tumblr,Instagram,BitBucket,Wordpress,Any Link, CV
+-- Upload File
+-- Whatsapp messaging
+-- Social share widget (for Jobs/Resume/App)
+-- Material Design 
+
+
+-- OTP Twilio integration
+-- Fetch sets of data cards as needed(ala infinite scroll)
+-- Ability to send/read SMS
+-- Read profile from LinkedIN & FB
+-- upload image to server
+-- integration with Crunchbase, Angellist etc
+-- integrate with 3rd party pre-verification
+-- Integrate with smarterer to 
+    -- create new tests
+    -- take existing tests from with the app
+    -- show scores as part of profile 
+
+
+-- Dashboard App Web
+-- Dashboard App Web(with same functionality + more)
+
+
+######################################################
 # Credits											 #
 ######################################################
 

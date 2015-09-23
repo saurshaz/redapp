@@ -1,4 +1,4 @@
-import React, { TouchableHighlight, AppRegistry, StyleSheet, Text, View, Animated, Component, PanResponder, } from 'react-native';
+import React, { Image,TouchableHighlight, AppRegistry, StyleSheet, Text, View, Animated, Component, PanResponder, } from 'react-native';
 import clamp from 'clamp';
 
 const People = [
@@ -10,7 +10,8 @@ const People = [
 ]
 
 var SWIPE_THRESHOLD = 120;
-
+var BlurView = require('react-native-blur').BlurView;
+import SlidableCardWrapper from './SlidableCardWrapper';
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -96,6 +97,8 @@ export default class extends Component {
   }
 
   render() {
+    let uri = "http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg";
+    
     let { pan, enter, } = this.state;
 
     let [translateX, translateY] = [pan.x, pan.y];
@@ -115,41 +118,54 @@ export default class extends Component {
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
     return (
-      <View style={styles.container}>
-        <Animated.View style={[styles.card, animatedCardStyles, {backgroundColor: this.state.person}]} {...this._panResponder.panHandlers}>
-          <View style={styles.head}>
-          <Text style={styles.title}>
-            {this.props.post_title}
-          </Text>
-          <TouchableHighlight 
-            onPress={() => this.openPage()}
-            underlayColor='#F6F6EF'>
-          <Text style={styles.source}>
-            (Source)
-          </Text>
-          </TouchableHighlight>
-          <Text style={styles.text}>
-            {this.state.post_text}
-          </Text>
-          <Text style={styles.postDetailsLine}>
-            Posted by Username | 18 Points
-          </Text>
-          <View style={styles.separator}/>
-          <Text style={styles.commentTitle}>{this.props.post_comments_count} Comments:</Text>
-          <Text style={styles.loadingText}>Fetching Comments...</Text>
-          </View>
-        </Animated.View>
+       <Image source={{uri}} style={styles.controlPanelMenu}>
+                <BlurView blurType="light" style={styles.blur}>
+                    <View style={styles.container}>
+                      <Animated.View style={[styles.card, animatedCardStyles, {}]} {...this._panResponder.panHandlers}>
+                        <View style={styles.head}>
+                        <Text style={styles.title}>
+                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </Text>
+                        <TouchableHighlight 
+                          onPress={() => this.openPage()}
+                          underlayColor='#F6F6EF'>
+                        <Text style={styles.source}>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        </Text>
+                        </TouchableHighlight>
+                        <Text style={styles.text}>
+                          {this.state.post_text}
+                        </Text>
+                        <Text style={styles.postDetailsLine}>
+                          Saurabh SHarma
+                        </Text>
+                        <View style={styles.separator}/>
+                        <Text style={styles.commentTitle}>{this.props.post_comments_count} @saurshaz </Text>
+                        <Text style={styles.loadingText}>https://about.me/saurshaz</Text>
+                        </View>
+                      </Animated.View>
 
-        <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Text style={styles.nopeText}>Nope!</Text>
-          <Text ref='yepStatic'>{this.state.yepStaticText}</Text>
-        </Animated.View>
+                      <Animated.View style={[styles.nope, animatedNopeStyles]}>
+                        <Text style={styles.nopeText}>Nope!</Text>
+                        <Text ref='yepStatic'>{this.state.yepStaticText}</Text>
+                      </Animated.View>
 
-        <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Text style={styles.yupText}>Yup!</Text>
-          <Text ref='yepStatic'>{this.state.yepStaticText}</Text>
-        </Animated.View>
-      </View>
+                      <Animated.View style={[styles.yup, animatedYupStyles]}>
+                        <Text style={styles.yupText}>Yup!</Text>
+                        <Text ref='yepStatic'>{this.state.yepStaticText}</Text>
+                      </Animated.View>
+                    </View>
+
+                </BlurView>
+
+              </Image>
     );
   }
 }
@@ -159,12 +175,12 @@ var styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    // backgroundColor: '#F5FCFF',
   },
   card: {
     width: 300,
     height: 300,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     alignSelf: 'center',
   },
   yup: {

@@ -40,36 +40,6 @@ var store = configureStore();
 export default class extends Component {
   
 
-  // render() {
-  //   return (
-  //     <Provider store={store}>
-  //       {() => <App />}
-  //     </Provider>
-  //   );
-  // }
-
-  // getInitialState(){
-  //   return {
-  //     drawerType: 'overlay',
-  //     openDrawerOffset:0,
-  //     closedDrawerOffset:0,
-  //     panOpenMask: .1,
-  //     panCloseMask: .9,
-  //     relativeDrag: false,
-  //     panStartCompensation: true,
-  //     openDrawerThreshold: .25,
-  //     tweenHandlerOn: false,
-  //     tweenDuration: 350,
-  //     tweenEasing: 'linear',
-  //     disabled: false,
-  //     tweenHandlerPreset: null,
-  //     acceptDoubleTap: true,
-  //     acceptTap: false,
-  //     acceptPan: true,
-  //     rightSide: false,
-  //   }
-  // }
-
   componentWillMount () {
     this.setState({
       drawerType: 'overlay',
@@ -78,8 +48,8 @@ export default class extends Component {
       panOpenMask: .1,
       panCloseMask: .1,
       relativeDrag: false,
-      panStartCompensation: true,
-      openDrawerThreshold: .10,
+      panStartCompensation: false,
+      openDrawerThreshold: .70,
       tweenHandlerOn: false,
       tweenDuration: 350,
       tweenEasing: 'linear',
@@ -88,7 +58,7 @@ export default class extends Component {
       acceptDoubleTap: true,
       acceptTap: false,
       acceptPan: false,
-      rightSide: false,
+      rightSide: true,
     });
   }
 
@@ -124,12 +94,12 @@ export default class extends Component {
       <Drawer
         ref="drawer"
         type="overlay"
-        openDrawerOffset={125} //50px gap on the right side of drawer
+        openDrawerOffset={80} //50px gap on the right side of drawer
         panCloseMask={1} //can close with right to left swipe anywhere on screen
         styles={{
           drawer: {
             shadowColor: "#000000",
-            shadowOpacity: 0.8,
+            shadowOpacity: 0.4,
             shadowRadius: 0,
           }
         }}
@@ -142,28 +112,7 @@ export default class extends Component {
         content={controlPanel}
         
         >
-        <MyMainView
-          drawerType={this.state.drawerType}
-          setParentState={this.setStateFrag}
-          openDrawer={this.openDrawer}
-          openDrawerOffset={this.state.openDrawerOffset}
-          closedDrawerOffset={this.state.closedDrawerOffset}
-          panOpenMask={this.state.panOpenMask}
-          panCloseMask={this.state.panCloseMask}
-          relativeDrag= {this.state.relativeDrag}
-          panStartCompensation= {this.state.panStartCompensation}
-          tweenHandlerOn={this.state.tweenHandlerOn}
-          disabled={this.state.disabled}
-          openDrawerThreshold={this.state.openDrawerThreshold}
-          tweenEasing={this.state.tweenEasing}
-          tweenHandlerPreset={this.state.tweenHandlerPreset}
-          animation={this.state.animation}
-          noopChange={this.noopChange}
-          acceptTap={this.state.acceptTap}
-          acceptDoubleTap={this.state.acceptDoubleTap}
-          acceptPan={this.state.acceptPan}
-          rightSide={this.state.rightSide}
-          />
+        <MyMainView />
       </Drawer>
     );
   }
