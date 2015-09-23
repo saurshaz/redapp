@@ -16,7 +16,7 @@ var Button = require('./Button')
 
 var drawerTypes = ['overlay', 'displace', 'static']
 var BlurView = require('react-native-blur').BlurView;
-import SlidableCardWrapper from './SlidableCardWrapper';
+import JobsHome from './JobsHome';
 
 
 
@@ -30,7 +30,7 @@ module.exports = React.createClass({
     return (
       
             <View style={styles.container}>
-              <SlidableCardWrapper />
+              <JobsHome />
             </View>
           
         

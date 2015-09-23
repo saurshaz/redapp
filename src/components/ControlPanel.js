@@ -40,7 +40,7 @@ export default class extends Component {
               uri: "http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg",
             }} style={ styles.cellImage }
             />
-          <Text style={styles.categoryLabel}>
+          <Text style={styles.row}>
             <Text style={styles.rowLabel}>My Matches</Text>
           </Text>
           <View style={styles.row}>

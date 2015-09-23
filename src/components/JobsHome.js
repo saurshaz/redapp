@@ -1,4 +1,4 @@
-import React, { Image,TouchableHighlight, AppRegistry, StyleSheet, Text, View, Animated, Component, PanResponder, } from 'react-native';
+import React from 'react-native';
 import clamp from 'clamp';
 
 const People = [
@@ -9,9 +9,41 @@ const People = [
   'orange',
 ]
 
+
+var {
+  Image,TouchableHighlight, AppRegistry, StyleSheet, Text, View, Animated, Component, PanResponder, 
+  StyleSheet,
+  Text,
+  View,
+  ListView,
+  ScrollView,
+  Image,
+  TouchableHighlight,
+  ActivityIndicatorIOS,
+} = React;
+
+var apPath = 'https://alpine-property.com/content';
+var JobsHome = require('./JobsHome');
+
+
+
+class Thumb extends React.Component{
+  
+  render() {
+    return (
+      <View style={styles.thumbView}>
+        <Image style={styles.thumb} source={{uri:this.props.uri}} />
+      </View>
+    );
+  }
+};
+
+Thumb.propTypes = {
+  uri: React.PropTypes.string.isRequired
+}
+
 var SWIPE_THRESHOLD = 120;
 var BlurView = require('react-native-blur').BlurView;
-import SlidableCardWrapper from './SlidableCardWrapper';
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -96,6 +128,14 @@ export default class extends Component {
     this._animateEntrance();
   }
 
+  
+
+
+createThumbRow(uri, i){
+  var path = `${apPath}/thumbs/${uri}`;
+  return <Thumb key={i} uri={path} />;
+}
+
   render() {
     let uri = "http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg";
     
@@ -117,38 +157,39 @@ export default class extends Component {
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
+    this.property = {brief:'Lorem Ipsum Ipsed ... Lorem Ipsum Ipsed Lorem Ipsum Ipsed Lorem Ipsum Ipsed',price:'10000'};
+    this.images = ['http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg','http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg','http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg'];
+    this.mainImage = `http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg`;
+    this.agentImage =  `http://edibleapple.com/wp-content/uploads/2009/11/steve-jobs-bill-gates-1991.jpg`;
+
+
     return (
-       <Image source={{uri}} style={styles.controlPanelMenu}>
-                <BlurView blurType="light" style={styles.blur}>
-                    <View style={styles.container}>
+                 <View style={styles.container}>
+
                       <Animated.View style={[styles.card, animatedCardStyles, {}]} {...this._panResponder.panHandlers}>
                         <View style={styles.head}>
-                        <Text style={styles.title}>
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </Text>
-                        <TouchableHighlight 
-                          onPress={() => this.openPage()}
-                          underlayColor='#F6F6EF'>
-                        <Text style={styles.source}>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        </Text>
-                        </TouchableHighlight>
-                        <Text style={styles.text}>
-                          {this.state.post_text}
-                        </Text>
-                        <Text style={styles.postDetailsLine}>
-                          Saurabh SHarma
-                        </Text>
-                        <View style={styles.separator}/>
-                        <Text style={styles.commentTitle}>{this.props.post_comments_count} @saurshaz </Text>
-                        <Text style={styles.loadingText}>https://about.me/saurshaz</Text>
+                          <Image style={styles.agent} 
+                              source={{uri: this.agentImage}} 
+                              />
+          
+                          <Image style={styles.image} 
+                              source={{uri: this.mainImage}} />
+                          <TouchableHighlight 
+                            onPress={() => this.openPage()}
+                            underlayColor='#F6F6EF'>
+                          <Text style={styles.source}>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                          </Text>
+                          </TouchableHighlight>
+                          <Text style={styles.text}>
+                            {this.state.post_text}
+                          </Text>
+                          <Text style={styles.postDetailsLine}>
+                            Saurabh SHarma
+                          </Text>
+                          <View style={styles.separator}/>
+                          <Text style={styles.commentTitle}>{this.props.post_comments_count} @saurshaz </Text>
+                          <Text style={styles.loadingText}>https://about.me/saurshaz</Text>
                         </View>
                       </Animated.View>
 
@@ -163,9 +204,7 @@ export default class extends Component {
                       </Animated.View>
                     </View>
 
-                </BlurView>
-
-              </Image>
+                
     );
   }
 }
@@ -175,12 +214,12 @@ var styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF',
   },
   card: {
     width: 300,
     height: 300,
-    // backgroundColor: 'red',
+    backgroundColor: 'red',
     alignSelf: 'center',
   },
   yup: {
@@ -253,5 +292,50 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     color: 'gray',
   },
+  thumb:{
+    height:113,
+    width:150,
+  },
+
+  thumbView:{
+    paddingRight:2
+  },
+
+    mainContainer: {
+    flex: 1,
+    padding: 0,
+    //marginTop: 44,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    backgroundColor: '#F8F7F2'
+  },
+    image: {
+      //width: 335,
+      height: 223,
+      alignSelf: 'stretch'
+    },
+  agent: {
+    width: 100,
+    height: 100,
+    marginTop: -50,
+    alignSelf: 'center',
+    borderRadius: 50
+  },
+
+  brief: {
+    margin:10
+  },
+
+  horizontalScrollView: {
+    height: 140,
+   // backgroundColor: '#ccc'
+  },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 10
+
+  },
+
 });
 
