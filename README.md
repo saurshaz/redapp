@@ -20,7 +20,7 @@ above all to
 - react-redux 
 - redux-thunk
 
-
+![](demo.gif)
 
 ######################################################
 # How to run this Project           				 #
