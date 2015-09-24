@@ -1,5 +1,5 @@
 ######################################################
-#   React Universal Counter App with Side Drawer   	 #
+#   Tinder Like Swipe App with Side Drawer   	 #
 ######################################################
 
 - Runs on iOS and Android
@@ -20,7 +20,7 @@ above all to
 - react-redux 
 - redux-thunk
 
-![](demo.png)
+
 
 ######################################################
 # How to run this Porject           				 #
