@@ -40,53 +40,13 @@ var store = configureStore();
 export default class extends Component {
   
 
-  componentWillMount () {
-    this.setState({
-      drawerType: 'overlay',
-      openDrawerOffset:0,
-      closedDrawerOffset:0,
-      panOpenMask: .1,
-      panCloseMask: .1,
-      relativeDrag: false,
-      panStartCompensation: false,
-      openDrawerThreshold: .70,
-      tweenHandlerOn: false,
-      tweenDuration: 350,
-      tweenEasing: 'linear',
-      disabled: false,
-      tweenHandlerPreset: null,
-      acceptDoubleTap: true,
-      acceptTap: false,
-      acceptPan: false,
-      rightSide: true,
-    });
-  }
 
-  setDrawerType(type){
-    this.setState({
-      drawerType: type
-    })
-  }
-
-  tweenHandler(ratio){
-    if(!this.state.tweenHandlerPreset){ return {} }
-    return tweens[this.state.tweenHandlerPreset](ratio)
-  }
-
-  noopChange(){
-    this.setState({
-      changeVal: Math.random()
-    })
-  }
-
+  
   openDrawer(){
     this.refs.drawer.open()
   }
 
-  setStateFrag(frag){
-    this.setState(frag)
-  }
-
+  
   render() {
     var controlPanel = <MyControlPanel closeDrawer={() => {this.refs.drawer.close()}}
      openDrawer={() => {this.refs.drawer.open()}} />
